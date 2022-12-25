@@ -13,6 +13,7 @@ const StateContext = createContext<any | null>(null);
 
 const ContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const [currentDronesShown, setCurrentDronesShown] = useState<any>();
+  const [serialIpsArray, setSerialIpsArray ] = useState<any[]>() ; 
 
 
 
@@ -24,17 +25,21 @@ const ContextProvider: FC<PropsWithChildren> = ({ children }) => {
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(()=> {
-    console.log("current drones shown changed")
-  }, [currentDronesShown])
 
   const fetchDrones = async () => {
     let res = await fetchData(DRONE_URL);
-    console.log(res.children[1]);
     setCurrentDronesShown(res.children[1]);
+    //setSerialIpsArray(res.children[1].children[0].children)
+    //console.log(res.children[1].children[2].getElementsByTagName('serialnumber'))
+    let serialArr: any[] = []
+    res.children[1].children.forEach((item: any )=> {
+        //console.log(item.getElementsByTagName('serialnumber')[0].value);
+        serialArr.push(item.getElementsByTagName('serialnumber')[0].value)
+    })
+    setSerialIpsArray(serialArr) ;
   };
   return (
-    <StateContext.Provider value={{currentDronesShown, fetchDrones}}>{children}</StateContext.Provider>
+    <StateContext.Provider value={{currentDronesShown, fetchDrones, serialIpsArray}}>{children}</StateContext.Provider>
   );
 };
 
