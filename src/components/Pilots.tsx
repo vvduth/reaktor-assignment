@@ -1,21 +1,26 @@
 import React, { useEffect } from "react";
 import { useStateContext } from "../context/ContextProvider";
 import { fetchPilot } from "../service";
+import PilotTableBody from "./PilotTableBody";
+import PilotTableHead from "./PilotTableHead";
 
 const Pilots = () => {
-  const { serialIpsArray } = useStateContext() as any;
-  useEffect(() => {
-    fetchPilotBasedAllSerialIds()
-  }, [serialIpsArray]);
+  const { violatedPilots, serialIpsArray } = useStateContext() as any;
 
-  const fetchPilotBasedAllSerialIds = () => {
-    if (serialIpsArray) {
-        serialIpsArray.forEach((id: any) => {
-            fetchPilot(id) ; 
-        });
-    }  
-  }
-  return <div></div>;
+  return (
+    <>
+      <div className="overflow-x-auto relative">
+        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <PilotTableHead />
+
+          {violatedPilots && violatedPilots.length > 0 ? (<>
+          
+            <PilotTableBody pilots = {violatedPilots}/> 
+          </>) : <>no</>}
+        </table>
+      </div>
+    </>
+  );
 };
 
 export default Pilots;

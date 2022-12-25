@@ -24,8 +24,9 @@ export const fetchPilot = async (serialID:any) => {
       if (res.status === 404) {
          console.log("pass bra " + serialID)
       } else {
-         console.log(res.data) ;
+         //console.log(res.data.firstName + " driving drone " + serialID) ;
       }
+      return res.data ; 
    } catch(e) {
       console.log(e) ;
    }
