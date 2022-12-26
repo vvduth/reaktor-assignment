@@ -10,6 +10,7 @@ import React, {
 import { fetchData, DRONE_URL } from "../service";
 import { violateCheckPilot } from "../utils/violateCheck";
 import { fetchPilot } from "../service";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 const StateContext = createContext<any | null>(null);
 
@@ -19,8 +20,17 @@ const ContextProvider: FC<PropsWithChildren> = ({ children }) => {
   // storing list of ip that violated every request
   const [serialIpsArray, setSerialIpsArray] = useState<any[]>();
   const [violatedPilots, setViolatedPilot] = useState<any[]>([]);
-  const [timeStamp, setTimeStamp] = useState<any>()
 
+  // filtered value
+  const item = window.localStorage.getItem(
+    "violatedPilotsDroneNumber"
+  ) as any;
+  const [persistDroneSerials, setPeristDroneSerials] = useLocalStorage('violatedPilotsDroneNumber')
+  // get all ip overtime, inclding duplcated value
+  const [collectedDroneSerials, setCollectedDroneSerials] = useState<any[]>(persistDroneSerials);
+  const [timeStamp, setTimeStamp] = useState<any>();
+
+  // send request every 2 secs 
   useEffect(() => {
     fetchDrones();
     const interval = setInterval(() => {
@@ -29,13 +39,22 @@ const ContextProvider: FC<PropsWithChildren> = ({ children }) => {
     return () => clearInterval(interval);
   }, []);
 
+  
+  useEffect(() => {
+    let removeDuplicateDroneSerialNumbers = [new Set(collectedDroneSerials)];
+    setPeristDroneSerials([...removeDuplicateDroneSerialNumbers[0]]);
+  }, [collectedDroneSerials]);
+
+  // useEffect(() => {
+  //   console.log("Persist data has changed")
+  // }, [persistDroneSerials.length]);
+
   const fetchDrones = async () => {
     // fetch all drones
     let res = await fetchData(DRONE_URL);
     setCurrentDronesShown(res.children[1]);
-    setTimeStamp(res.children[1].attributes.snapshotTimestamp)
+    setTimeStamp(res.children[1].attributes.snapshotTimestamp);
 
-    // dont know why tf i put these lines
     let violatedPilotsTemp: any[] = [];
 
     // the array to store the serial number of those violated drones if there is any
@@ -54,9 +73,16 @@ const ContextProvider: FC<PropsWithChildren> = ({ children }) => {
         violatedPilotsTemp.push(pilotInfoIncludeId);
       }
     }
-    setSerialIpsArray(serialArr) ;
-    let arr3 = [new Set([...violatedPilots, ...violatedPilotsTemp])]
-    setViolatedPilot(current => [current,...arr3[0]]) ; 
+
+    // get raw data for all violated ips with duplicated
+    setSerialIpsArray(serialArr);
+    setCollectedDroneSerials((current) => [...current, ...serialArr]);
+    
+    
+
+    // this will contain all the violated pilot in each request
+    let arr3 = [new Set([...violatedPilots, ...violatedPilotsTemp])];
+    setViolatedPilot((current) => [current, ...arr3[0]]);
   };
   return (
     <StateContext.Provider
@@ -65,7 +91,8 @@ const ContextProvider: FC<PropsWithChildren> = ({ children }) => {
         fetchDrones,
         serialIpsArray,
         violatedPilots,
-        timeStamp
+        timeStamp,
+        persistDroneSerials
       }}
     >
       {children}

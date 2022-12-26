@@ -5,8 +5,7 @@ const PilotTableHead = () => {
     <>
     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
      <tr>
-       <th scope="col" className="py-3 px-6">Drone serial number</th>
-       <th scope="col" className="py-3 px-6">Pilot id </th>
+       <th scope="col" className="py-3 px-6">Pilot phone </th>
        <th scope="col" className="py-3 px-6">First name</th>
        <th scope="col" className="py-3 px-6">Last name</th>
        <th scope="col" className="py-3 px-6">Email</th>

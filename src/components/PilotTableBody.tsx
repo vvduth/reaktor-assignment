@@ -16,14 +16,7 @@ const PilotTableBody = ({ pilots }: any) => {
               className="py-4 px-6 font-medium whitespace-nowrap text-white"
               
             >
-                {pilot.droneNum}
-            </td>
-            <td
-              scope="row"
-              className="py-4 px-6 font-medium whitespace-nowrap text-white"
-              
-            >
-                {pilot.pilotId}
+                {pilot.phoneNumber}
             </td>
             <td
               scope="row"
