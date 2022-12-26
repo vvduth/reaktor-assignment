@@ -12,7 +12,8 @@ const Pilots = () => {
   const fetchPilotFromPersistData = async () => {
     let pilots = [] ; 
     for (let item of persistDroneSerials) {
-      let onePilot = await fetchPilot(item) ; 
+      //let onePilot = await fetchPilot(item) ; 
+      let onePilot = {} ;
       pilots.push(onePilot)
     }
     setPilotFetchedFromPeristDrone(pilots)

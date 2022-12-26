@@ -45,10 +45,7 @@ const ContextProvider: FC<PropsWithChildren> = ({ children }) => {
     setPeristDroneSerials([...removeDuplicateDroneSerialNumbers[0]]);
   }, [collectedDroneSerials]);
 
-  // useEffect(() => {
-  //   console.log("Persist data has changed")
-  // }, [persistDroneSerials.length]);
-
+  
   const fetchDrones = async () => {
     // fetch all drones
     let res = await fetchData(DRONE_URL);
@@ -66,7 +63,8 @@ const ContextProvider: FC<PropsWithChildren> = ({ children }) => {
 
       if (!violateCheckPilot(Number(X_val), Number(Y_val))) {
         let serialId = item.getElementsByTagName("serialnumber")[0].value;
-        let pilotFromId = await fetchPilot(serialId);
+        //let pilotFromId = await fetchPilot(serialId);
+        let pilotFromId:any[] = []
         let pilotInfoIncludeId = { ...pilotFromId, droneNum: serialId };
 
         serialArr.push(serialId);
@@ -78,8 +76,6 @@ const ContextProvider: FC<PropsWithChildren> = ({ children }) => {
     setSerialIpsArray(serialArr);
     setCollectedDroneSerials((current) => [...current, ...serialArr]);
     
-    
-
     // this will contain all the violated pilot in each request
     let arr3 = [new Set([...violatedPilots, ...violatedPilotsTemp])];
     setViolatedPilot((current) => [current, ...arr3[0]]);

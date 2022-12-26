@@ -4,6 +4,10 @@ import Infotext from "./components/Infotext";
 import Pilots from "./components/Pilots";
 import ContextProvider from "./context/ContextProvider";
 import { fetchData, DRONE_URL } from "./service";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
+import { useAppSelector, useAppDispatch } from "./store/hooks";
+
 
 function App() {
   return (
@@ -22,4 +26,12 @@ function App() {
   );
 }
 
-export default App;
+const AppWrapper = () => {
+  return (
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
+};
+
+export default AppWrapper;

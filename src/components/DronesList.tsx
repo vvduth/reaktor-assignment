@@ -2,13 +2,25 @@ import React, { useEffect } from "react";
 import { useStateContext } from "../context/ContextProvider";
 import DroneTableRow from "./DroneTableRow";
 import TableHead from "./TableHead";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { getDisplayDrones } from "../store/dronesSlice";
 
 const unecessField = ["mac", "ipv4", "ipv6", "firmware", "altitude"];
 const formatableField  = ['positionX', 'positionY']
 const DronesList = () => {
   const { currentDronesShown, fetchDrones } = useStateContext() as any;
+
+  const dispatch = useAppDispatch();
+  const post = useAppSelector((state) => state.drones);
+
   useEffect(() => {
   }, [currentDronesShown]);
+
+  useEffect(() => {
+    dispatch(getDisplayDrones());
+  }, [dispatch]);
+
+  
 
   return (
     <div>
