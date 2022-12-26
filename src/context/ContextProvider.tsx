@@ -19,6 +19,7 @@ const ContextProvider: FC<PropsWithChildren> = ({ children }) => {
   // storing list of ip that violated every request
   const [serialIpsArray, setSerialIpsArray] = useState<any[]>();
   const [violatedPilots, setViolatedPilot] = useState<any[]>([]);
+  const [timeStamp, setTimeStamp] = useState<any>()
 
   useEffect(() => {
     fetchDrones();
@@ -28,61 +29,34 @@ const ContextProvider: FC<PropsWithChildren> = ({ children }) => {
     return () => clearInterval(interval);
   }, []);
 
-  //   useEffect(() => {
-  //     fetchPilotBasedAllSerialIds()
-  //   }, [serialIpsArray]);
-
-  const fetchPilotBasedAllSerialIds = async () => {
-    if (serialIpsArray) {
-      let pilotInforArray = [] as any[];
-      serialIpsArray.forEach(async (id: any) => {
-        let pilotsInfo = await fetchPilot(id);
-        pilotInforArray.push(pilotsInfo);
-      });
-      //setViolatedPilot(pilotInforArray) ;
-    }
-  };
-
-  function containsObject(obj: any) {
-    let a = false 
-    violatedPilots.forEach((pilot) =>  {
-        if (pilot.pilotId === obj.pilotId ) {
-            console.log(pilot.pilotId + " and " + obj.pilotId)
-            a = true ; 
-        } else {
-            console.log(pilot.pilotId + " and " + obj.pilotId)
-            a = false 
-        }
-    })
-    return  a ; 
-  }
-
   const fetchDrones = async () => {
+    // fetch all drones
     let res = await fetchData(DRONE_URL);
     setCurrentDronesShown(res.children[1]);
-    //setSerialIpsArray(res.children[1].children[0].children)
-    //console.log(res.children[1].children[2].getElementsByTagName('serialnumber'))
+    setTimeStamp(res.children[1].attributes.snapshotTimestamp)
+
+    // dont know why tf i put these lines
+    let violatedPilotsTemp: any[] = [];
+
+    // the array to store the serial number of those violated drones if there is any
     let serialArr: any[] = [];
-    res.children[1].children.forEach(async (item: any) => {
-      //console.log(item.getElementsByTagName('serialnumber')[0].value);
+
+    for (let item of res.children[1].children) {
       let X_val = Number(item.getElementsByTagName("positionX")[0].value);
       let Y_val = Number(item.getElementsByTagName("positionY")[0].value);
 
       if (!violateCheckPilot(Number(X_val), Number(Y_val))) {
-        serialArr.push(item.getElementsByTagName("serialnumber")[0].value);
         let serialId = item.getElementsByTagName("serialnumber")[0].value;
         let pilotFromId = await fetchPilot(serialId);
         let pilotInfoIncludeId = { ...pilotFromId, droneNum: serialId };
-        if (containsObject(pilotInfoIncludeId)) {
-            console.log("exist") ; 
-        } else {
-            console.log(" no exist")
-            setViolatedPilot(current => [...current, pilotInfoIncludeId])
-        }
-        //setViolatedPilot(current => [...current, pilotInfoIncludeId])
+
+        serialArr.push(serialId);
+        violatedPilotsTemp.push(pilotInfoIncludeId);
       }
-    });
-    setSerialIpsArray(serialArr);
+    }
+    setSerialIpsArray(serialArr) ;
+    let arr3 = [new Set([...violatedPilots, ...violatedPilotsTemp])]
+    setViolatedPilot(current => [current,...arr3[0]]) ; 
   };
   return (
     <StateContext.Provider
@@ -91,6 +65,7 @@ const ContextProvider: FC<PropsWithChildren> = ({ children }) => {
         fetchDrones,
         serialIpsArray,
         violatedPilots,
+        timeStamp
       }}
     >
       {children}

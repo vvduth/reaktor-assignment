@@ -12,6 +12,7 @@ export const fetchData = async (url: string) => {
       },
     });
     let xml = new XMLParser().parseFromString(res.data)
+    //console.log(xml.children[1].attributes.snapshotTimestamp)
     return xml ;
   } catch (e) {
     console.log(e);

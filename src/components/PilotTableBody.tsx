@@ -3,7 +3,6 @@ import { useStateContext } from "../context/ContextProvider";
 import { fetchPilot } from "../service";
 
 const PilotTableBody = ({ pilots }: any) => {
-  console.log(pilots);
   return (
     <>
       {pilots.map((pilot: any) => (
