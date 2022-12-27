@@ -25,9 +25,9 @@ const ContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const item = window.localStorage.getItem(
     "violatedPilotsDroneNumber"
   ) as any;
-  const [persistDroneSerials, setPeristDroneSerials] = useLocalStorage('violatedPilotsDroneNumber')
+  //const [persistDroneSerials, setPeristDroneSerials] = useLocalStorage('violatedPilotsDroneNumber')
   // get all ip overtime, inclding duplcated value
-  const [collectedDroneSerials, setCollectedDroneSerials] = useState<any[]>(persistDroneSerials);
+  const [collectedDroneSerials, setCollectedDroneSerials] = useState<any[]>([]);
   const [timeStamp, setTimeStamp] = useState<any>();
 
   // send request every 2 secs 
@@ -42,7 +42,7 @@ const ContextProvider: FC<PropsWithChildren> = ({ children }) => {
   
   useEffect(() => {
     let removeDuplicateDroneSerialNumbers = [new Set(collectedDroneSerials)];
-    setPeristDroneSerials([...removeDuplicateDroneSerialNumbers[0]]);
+    //setPeristDroneSerials([...removeDuplicateDroneSerialNumbers[0]]);
   }, [collectedDroneSerials]);
 
   
@@ -88,7 +88,7 @@ const ContextProvider: FC<PropsWithChildren> = ({ children }) => {
         serialIpsArray,
         violatedPilots,
         timeStamp,
-        persistDroneSerials
+        // persistDroneSerials
       }}
     >
       {children}
