@@ -15,7 +15,7 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 const StateContext = createContext<any | null>(null);
 
 const ContextProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [currentDronesShown, setCurrentDronesShown] = useState<any>();
+  
 
   // storing list of ip that violated every request
   const [serialIpsArray, setSerialIpsArray] = useState<any[]>();
@@ -48,29 +48,29 @@ const ContextProvider: FC<PropsWithChildren> = ({ children }) => {
   
   const fetchDrones = async () => {
     // fetch all drones
-    let res = await fetchData(DRONE_URL);
-    setCurrentDronesShown(res.children[1]);
-    setTimeStamp(res.children[1].attributes.snapshotTimestamp);
+    
+    
+    //setTimeStamp(res.children[1].attributes.snapshotTimestamp);
 
     let violatedPilotsTemp: any[] = [];
 
     // the array to store the serial number of those violated drones if there is any
     let serialArr: any[] = [];
 
-    for (let item of res.children[1].children) {
-      let X_val = Number(item.getElementsByTagName("positionX")[0].value);
-      let Y_val = Number(item.getElementsByTagName("positionY")[0].value);
+    // for (let item of res.children[1].children) {
+    //   let X_val = Number(item.getElementsByTagName("positionX")[0].value);
+    //   let Y_val = Number(item.getElementsByTagName("positionY")[0].value);
 
-      if (!violateCheckPilot(Number(X_val), Number(Y_val))) {
-        let serialId = item.getElementsByTagName("serialnumber")[0].value;
-        //let pilotFromId = await fetchPilot(serialId);
-        let pilotFromId:any[] = []
-        let pilotInfoIncludeId = { ...pilotFromId, droneNum: serialId };
+    //   if (!violateCheckPilot(Number(X_val), Number(Y_val))) {
+    //     let serialId = item.getElementsByTagName("serialnumber")[0].value;
+    //     //let pilotFromId = await fetchPilot(serialId);
+    //     let pilotFromId:any[] = []
+    //     let pilotInfoIncludeId = { ...pilotFromId, droneNum: serialId };
 
-        serialArr.push(serialId);
-        violatedPilotsTemp.push(pilotInfoIncludeId);
-      }
-    }
+    //     serialArr.push(serialId);
+    //     violatedPilotsTemp.push(pilotInfoIncludeId);
+    //   }
+    // }
 
     // get raw data for all violated ips with duplicated
     setSerialIpsArray(serialArr);
@@ -83,7 +83,7 @@ const ContextProvider: FC<PropsWithChildren> = ({ children }) => {
   return (
     <StateContext.Provider
       value={{
-        currentDronesShown,
+        
         fetchDrones,
         serialIpsArray,
         violatedPilots,

@@ -11,7 +11,6 @@ export const getDisplayDrones = createAsyncThunk(
   async () => {
     try {
       let res = await fetchData(DRONE_URL);
-      //setCurrentDronesShown(res.children[1]);
       return res.children[1];
     } catch (e: any) {
       return e.response.data;

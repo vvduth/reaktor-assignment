@@ -1,37 +1,43 @@
 import React, { useEffect } from "react";
-import { useStateContext } from "../context/ContextProvider";
 import DroneTableRow from "./DroneTableRow";
 import TableHead from "./TableHead";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { getDisplayDrones } from "../store/dronesSlice";
 
 const unecessField = ["mac", "ipv4", "ipv6", "firmware", "altitude"];
-const formatableField  = ['positionX', 'positionY']
+const formatableField = ["positionX", "positionY"];
 const DronesList = () => {
-  const { currentDronesShown, fetchDrones } = useStateContext() as any;
 
   const dispatch = useAppDispatch();
-  const post = useAppSelector((state) => state.drones);
+  const drones = useAppSelector((state) => state.drones.drones);
 
   useEffect(() => {
-  }, [currentDronesShown]);
+    const interval = setInterval(() => {
+      dispatch(getDisplayDrones());
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
-    dispatch(getDisplayDrones());
-  }, [dispatch]);
+    console.log(drones)
+  }, [dispatch, drones]);
 
-  
+  // useEffect(() => {
+  //   dispatch(getDisplayDrones());
+  // }, [dispatch]);
 
   return (
     <div>
-      {currentDronesShown ? (
+      {drones ? (
         <div className="overflow-x-auto relative">
           <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <TableHead />
             <tbody>
-              {currentDronesShown.children.map((drone: any) => (
-                <DroneTableRow key={Math.floor(Math.random() * 10000)} drone={drone}/>
-                
+              {drones.children.map((drone: any) => (
+                <DroneTableRow
+                  key={Math.floor(Math.random() * 10000)}
+                  drone={drone}
+                />
               ))}
             </tbody>
           </table>

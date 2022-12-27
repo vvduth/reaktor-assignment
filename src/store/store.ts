@@ -5,7 +5,11 @@ import dronesReducer from "./dronesSlice";
 export const store = configureStore({
     reducer: {
         drones: dronesReducer
-    }
+    },
+    middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false
+    }),
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

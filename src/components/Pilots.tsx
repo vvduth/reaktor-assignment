@@ -5,24 +5,19 @@ import PilotTableBody from "./PilotTableBody";
 import PilotTableHead from "./PilotTableHead";
 
 const Pilots = () => {
-  const { violatedPilots, serialIpsArray , persistDroneSerials} = useStateContext() as any;
+  const { violatedPilots, serialIpsArray } = useStateContext() as any;
 
   const [pilotFetchedFromPeristDrone, setPilotFetchedFromPeristDrone] = useState<any[]>() ;
   
   const fetchPilotFromPersistData = async () => {
-    let pilots = [] ; 
-    for (let item of persistDroneSerials) {
-      //let onePilot = await fetchPilot(item) ; 
-      let onePilot = {} ;
-      pilots.push(onePilot)
-    }
+    let pilots = [] as any ; 
+    
     setPilotFetchedFromPeristDrone(pilots)
   }
   
   useEffect(()=> {
     fetchPilotFromPersistData()
-   console.log(pilotFetchedFromPeristDrone)
-  },[persistDroneSerials]) 
+  },[]) 
   
   return (
     <>
