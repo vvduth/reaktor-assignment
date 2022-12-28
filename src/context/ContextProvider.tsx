@@ -7,10 +7,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { fetchData, DRONE_URL } from "../service";
-import { violateCheckPilot } from "../utils/violateCheck";
-import { fetchPilot } from "../service";
-import { useLocalStorage } from "../hooks/useLocalStorage";
+
 
 const StateContext = createContext<any | null>(null);
 

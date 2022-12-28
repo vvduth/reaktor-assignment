@@ -8,7 +8,6 @@ const formatableField = ["positionX", "positionY"];
 
 const DroneTableRow = ({ drone }: any) => {
   const dispatch = useAppDispatch();
-  const pilot = useAppSelector((state) => state.pilots);
 
   let serialNumber = drone.children[0].value 
   

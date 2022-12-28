@@ -1,23 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { useStateContext } from "../context/ContextProvider";
-import { fetchPilot } from "../service";
+import { violateCheckPilot } from "../utils/violateCheck";
 import PilotTableBody from "./PilotTableBody";
 import PilotTableHead from "./PilotTableHead";
+import { getViolatedPilots } from "../store/pilotsSlice";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 
 const Pilots = () => {
-  const { violatedPilots, serialIpsArray } = useStateContext() as any;
-
-  const [pilotFetchedFromPeristDrone, setPilotFetchedFromPeristDrone] = useState<any[]>() ;
   
-  const fetchPilotFromPersistData = async () => {
-    let pilots = [] as any ; 
-    
-    setPilotFetchedFromPeristDrone(pilots)
-  }
+  const dispatch = useAppDispatch() ;
+  
+  const pilots = useAppSelector((state) => state.pilots.pilots)
+
+  
   
   useEffect(()=> {
-    fetchPilotFromPersistData()
-  },[]) 
+    console.log(pilots)
+  },[dispatch, pilots]) 
   
   return (
     <>
@@ -25,9 +23,9 @@ const Pilots = () => {
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <PilotTableHead />
 
-          {pilotFetchedFromPeristDrone && pilotFetchedFromPeristDrone.length > 0 ? (<>
+          {pilots ? (<>
           
-            <PilotTableBody pilots = {pilotFetchedFromPeristDrone}/> 
+            <PilotTableBody pilots = {pilots}/> 
           </>) : <>no</>}
         </table>
       </div>

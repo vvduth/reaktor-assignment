@@ -9,7 +9,6 @@ const TableHead = () => {
     //console.log(drones.attributes.snapshotTimestamp)
   },[drones])
 
-  //res.children[1].attributes.snapshotTimestamp
   return (
     <>
       {drones ? (
