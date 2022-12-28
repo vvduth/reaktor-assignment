@@ -9,6 +9,7 @@ const PilotTableHead = () => {
        <th scope="col" className="py-3 px-6">First name</th>
        <th scope="col" className="py-3 px-6">Last name</th>
        <th scope="col" className="py-3 px-6">Email</th>
+       <th scope="col" className="py-3 px-6">Valid until</th>
      </tr>
    </thead>
   </>

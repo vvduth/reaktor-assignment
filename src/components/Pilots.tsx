@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { violateCheckPilot } from "../utils/violateCheck";
 import PilotTableBody from "./PilotTableBody";
 import PilotTableHead from "./PilotTableHead";
-import { getViolatedPilots } from "../store/pilotsSlice";
+import { filterExpriedPilots, getViolatedPilots } from "../store/pilotsSlice";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 
 const Pilots = () => {
@@ -11,11 +11,14 @@ const Pilots = () => {
   
   const pilots = useAppSelector((state) => state.pilots.pilots)
 
-  
+  const drones = useAppSelector((state) => state.drones.drones);
   
   useEffect(()=> {
-    console.log(pilots)
-  },[dispatch, pilots]) 
+    
+  },[dispatch]) 
+  useEffect(()=> {
+    dispatch(filterExpriedPilots())
+  },[drones])
   
   return (
     <>

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { fetchPilot } from "../service";
 import { useAppSelector } from "../store/hooks";
 import { useAppDispatch } from "../store/hooks";
-import { getViolatedPilots } from "../store/pilotsSlice";
+import { filterExpriedPilots, getViolatedPilots } from "../store/pilotsSlice";
 const unecessField = ["mac", "ipv4", "ipv6", "firmware", "altitude"];
 const formatableField = ["positionX", "positionY"];
 
@@ -19,10 +19,11 @@ const DroneTableRow = ({ drone }: any) => {
     let b = (y_pos - 250000) * (y_pos - 250000);
     return Math.sqrt(a + b) >= 100000;
   };
+  
   if (!violateCheck(X_val,Y_val)) {
     dispatch(getViolatedPilots(serialNumber))
   }
-
+  
   const passViochecKStyle =
     "py-4 px-6 font-medium whitespace-nowrap text-green-600";
   const notPassVioCheckStyle =
