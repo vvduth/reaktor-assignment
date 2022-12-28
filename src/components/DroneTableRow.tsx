@@ -1,16 +1,28 @@
 import React, { useEffect } from "react";
+import { fetchPilot } from "../service";
+import { useAppSelector } from "../store/hooks";
+import { useAppDispatch } from "../store/hooks";
+import { getViolatedPilots } from "../store/pilotsSlice";
 const unecessField = ["mac", "ipv4", "ipv6", "firmware", "altitude"];
 const formatableField = ["positionX", "positionY"];
 
 const DroneTableRow = ({ drone }: any) => {
+  const dispatch = useAppDispatch();
+  const pilot = useAppSelector((state) => state.pilots);
+
+  let serialNumber = drone.children[0].value 
+  
   let X_val = Number(drone.getElementsByTagName("positionX")[0].value);
   let Y_val = Number(drone.getElementsByTagName("positionY")[0].value);
 
   const violateCheck = (x_pos: number, y_pos: number) => {
-    let a = (x_pos - 250000) * (x_pos - 250000)
-    let b = (y_pos - 250000) * (y_pos - 250000)
-    return (Math.sqrt(a+b) >= 100000);
+    let a = (x_pos - 250000) * (x_pos - 250000);
+    let b = (y_pos - 250000) * (y_pos - 250000);
+    return Math.sqrt(a + b) >= 100000;
   };
+  if (!violateCheck(X_val,Y_val)) {
+    dispatch(getViolatedPilots(serialNumber))
+  }
 
   const passViochecKStyle =
     "py-4 px-6 font-medium whitespace-nowrap text-green-600";

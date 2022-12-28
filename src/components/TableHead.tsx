@@ -5,13 +5,17 @@ const TableHead = () => {
   const dispatch = useAppDispatch();
   const drones = useAppSelector((state) => state.drones.drones);
 
+  useEffect(()=> {
+    //console.log(drones.attributes.snapshotTimestamp)
+  },[drones])
+
   //res.children[1].attributes.snapshotTimestamp
   return (
     <>
       {drones ? (
         <p className="w-full text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           {" "}
-          {new Date(drones.children[1].attributes.snapshotTimestamp).toString()}
+          {new Date(drones.attributes.snapshotTimestamp).toString()}
         </p>
       ) : (
         <></>

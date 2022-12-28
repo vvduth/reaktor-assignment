@@ -19,7 +19,7 @@ const DronesList = () => {
   }, []);
 
   useEffect(() => {
-    console.log(drones)
+    //console.log(drones)
   }, [dispatch, drones]);
 
   // useEffect(() => {

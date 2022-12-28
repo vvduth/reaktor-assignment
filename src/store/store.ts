@@ -1,10 +1,13 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 import { DRONE_URL } from "../service";
 import dronesReducer from "./dronesSlice";
+import pilotsReducer from "./pilotsSlice";
+//pilotsSlice
 
 export const store = configureStore({
     reducer: {
-        drones: dronesReducer
+        drones: dronesReducer,
+        pilots: pilotsReducer
     },
     middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

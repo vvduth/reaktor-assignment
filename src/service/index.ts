@@ -22,11 +22,6 @@ export const fetchData = async (url: string) => {
 export const fetchPilot = async (serialID:any) => {
    try {
       const res = await axios.get(`http://assignments.reaktor.com/birdnest/pilots/` + serialID) ;
-      if (res.status === 404) {
-         console.log("pass bra " + serialID)
-      } else {
-         //console.log(res.data.firstName + " driving drone " + serialID) ;
-      }
       return res.data ; 
    } catch(e) {
       console.log(e) ;
