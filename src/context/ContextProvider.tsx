@@ -25,7 +25,7 @@ const ContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const item = window.localStorage.getItem(
     "violatedPilotsDroneNumber"
   ) as any;
-  //const [persistDroneSerials, setPeristDroneSerials] = useLocalStorage('violatedPilotsDroneNumber')
+  
   // get all ip overtime, inclding duplcated value
   const [collectedDroneSerials, setCollectedDroneSerials] = useState<any[]>([]);
   const [timeStamp, setTimeStamp] = useState<any>();
@@ -42,7 +42,7 @@ const ContextProvider: FC<PropsWithChildren> = ({ children }) => {
   
   useEffect(() => {
     let removeDuplicateDroneSerialNumbers = [new Set(collectedDroneSerials)];
-    //setPeristDroneSerials([...removeDuplicateDroneSerialNumbers[0]]);
+    
   }, [collectedDroneSerials]);
 
   
@@ -57,20 +57,7 @@ const ContextProvider: FC<PropsWithChildren> = ({ children }) => {
     // the array to store the serial number of those violated drones if there is any
     let serialArr: any[] = [];
 
-    // for (let item of res.children[1].children) {
-    //   let X_val = Number(item.getElementsByTagName("positionX")[0].value);
-    //   let Y_val = Number(item.getElementsByTagName("positionY")[0].value);
-
-    //   if (!violateCheckPilot(Number(X_val), Number(Y_val))) {
-    //     let serialId = item.getElementsByTagName("serialnumber")[0].value;
-    //     //let pilotFromId = await fetchPilot(serialId);
-    //     let pilotFromId:any[] = []
-    //     let pilotInfoIncludeId = { ...pilotFromId, droneNum: serialId };
-
-    //     serialArr.push(serialId);
-    //     violatedPilotsTemp.push(pilotInfoIncludeId);
-    //   }
-    // }
+  
 
     // get raw data for all violated ips with duplicated
     setSerialIpsArray(serialArr);
