@@ -7,6 +7,7 @@ import { fetchData, DRONE_URL } from "./service";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 import { useAppSelector, useAppDispatch } from "./store/hooks";
+import SocketTest from "./components/SocketTest";
 
 
 function App() {
@@ -20,6 +21,9 @@ function App() {
         <div>
           <Infotext message={"Information of those pilots who drove violated drones"}/>
           <Pilots />
+        </div>
+        <div>
+          <SocketTest /> 
         </div>
       </div>
     </ContextProvider>

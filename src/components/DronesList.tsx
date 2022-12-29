@@ -12,6 +12,7 @@ const DronesList = () => {
   const drones = useAppSelector((state) => state.drones.drones);
 
   useEffect(() => {
+    dispatch(getDisplayDrones());
     const interval = setInterval(() => {
       dispatch(getDisplayDrones());
     }, 2000);

@@ -54,6 +54,12 @@ const pilotsSlice = createSlice({
             ...state, 
             pilots: state.pilots.filter((pilot:any) => pilot.validUntil - Date.now() > 0)
         }
+    }, 
+    reloadPilots: (state,action) => {
+      return {
+        ...state ,
+        pilots: action.payload 
+      }
     }
   },
   extraReducers(builder) {
@@ -67,5 +73,5 @@ const pilotsSlice = createSlice({
   },
 });
 
-export const {filterExpriedPilots} = pilotsSlice.actions;
+export const {filterExpriedPilots, reloadPilots} = pilotsSlice.actions;
 export default pilotsSlice.reducer;

@@ -26,10 +26,10 @@ const Pilots = () => {
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <PilotTableHead />
 
-          {pilots ? (<>
+          {(pilots && pilots.length)  ? (<>
           
             <PilotTableBody pilots = {pilots}/> 
-          </>) : <>no</>}
+          </>) : <p className="text-white">Loading datat for the last minutes</p>}
         </table>
       </div>
     </>

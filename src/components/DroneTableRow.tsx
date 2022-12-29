@@ -21,7 +21,7 @@ const DroneTableRow = ({ drone }: any) => {
   };
   
   if (!violateCheck(X_val,Y_val)) {
-    dispatch(getViolatedPilots(serialNumber))
+    //dispatch(getViolatedPilots(serialNumber))
   }
   
   const passViochecKStyle =

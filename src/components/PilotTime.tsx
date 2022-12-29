@@ -8,7 +8,7 @@ const PilotTime = ({ validUntil }: any) => {
   useEffect(() => {
     setTimeLeft(validUntil - Date.now());
   }, [drones]);
-  return <>{new Date(validUntil).toLocaleTimeString()} {" "}  {validUntil} { " "} {validUntil - Date.now()}</>;
+  return <>{new Date(validUntil).toLocaleTimeString()} countdown {(validUntil - Date.now())/1000} secs</>;
 };
 
 export default PilotTime;
