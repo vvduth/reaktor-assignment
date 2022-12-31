@@ -30,14 +30,14 @@ const SocketTest = () => {
       });
 
       socket.on("closetDistance", (distance: any ) => {
-        console.log(distance)
+        //console.log(distance)
         setClosetDisance(distance)
       })
     }
   }, [socket]);
 
   useEffect(() => {
-     console.log("list has changed");
+     
    }, [list]);
   return (
     <>

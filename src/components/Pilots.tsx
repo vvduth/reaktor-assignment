@@ -23,13 +23,13 @@ const Pilots = () => {
   return (
     <>
       <div className="overflow-x-auto relative">
-        <table className="w-full h-1/2 text-sm text-left text-gray-500 dark:text-gray-400">
+        <table className="w-full h-1/2 max-h-0.5 text-sm text-left text-gray-500 dark:text-gray-400">
           <PilotTableHead />
 
           {(pilots && pilots.length)  ? (<>
           
             <PilotTableBody pilots = {pilots}/> 
-          </>) : <p className="text-white">Loading datat for the last minutes</p>}
+          </>) : <p className="text-white">Loading data for the last 10 minutes</p>}
         </table>
       </div>
     </>
