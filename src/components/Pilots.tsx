@@ -23,7 +23,7 @@ const Pilots = () => {
   return (
     <>
       <div className="overflow-x-auto relative">
-        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <table className="w-full h-1/2 text-sm text-left text-gray-500 dark:text-gray-400">
           <PilotTableHead />
 
           {(pilots && pilots.length)  ? (<>

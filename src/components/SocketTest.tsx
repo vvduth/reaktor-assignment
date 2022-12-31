@@ -8,19 +8,12 @@ const socketURL = "http://localhost:5000/";
 
 const SocketTest = () => {
   const [list, setList] = useState<any>();
+  const [closestDistance, setClosetDisance] = useState<any>() ;
 
   const dispatch = useAppDispatch();
   const socket = useAppSelector((state) => state.socket.socket);
   useEffect(() => {
     const socket1 = io(socketURL);
-    // socket.on("connect", () => {
-    //   console.log("We are conencted to the server ", socket.id);
-    // });
-
-    // socket.on("sayhi", (mess) => {
-    //   console.log(mess);
-    //   setList(mess);
-    // });
     dispatch(setUpSocket(socket1));
   }, []);
 
@@ -31,11 +24,15 @@ const SocketTest = () => {
       });
 
       socket.on("sayhi", (mess:any) => {
-        console.log(mess);
         setList(mess);
         dispatch(reloadPilots(mess))
 
       });
+
+      socket.on("closetDistance", (distance: any ) => {
+        console.log(distance)
+        setClosetDisance(distance)
+      })
     }
   }, [socket]);
 
@@ -44,8 +41,8 @@ const SocketTest = () => {
    }, [list]);
   return (
     <>
-      {list ? (
-        <div className="text-white">socket area</div>
+      {(  closestDistance ) ? (
+        <div className="text-white">Closest distance recorded {closestDistance.toFixed(2)}</div>
       ) : (
         <p className="text-white">fethcing bra</p>
       )}

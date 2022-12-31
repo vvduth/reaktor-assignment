@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import { store } from "./store/store";
 import { useAppSelector, useAppDispatch } from "./store/hooks";
 import SocketTest from "./components/SocketTest";
+import DisplayLocation from "./components/DisplayLocation";
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         </div>
         <div>
           <SocketTest /> 
+          <DisplayLocation /> 
         </div>
       </div>
     </ContextProvider>
