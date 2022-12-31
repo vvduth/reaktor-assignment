@@ -24,6 +24,7 @@ function App() {
           <Pilots />
         </div>
         <div>
+          <Infotext message={"Closest distance deteched and position visualization"}/>
           <SocketTest /> 
           <DisplayLocation /> 
         </div>

@@ -3,13 +3,13 @@ import React from 'react'
 const PilotTableHead = () => {
   return (
     <>
-    <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-     <tr>
-       <th scope="col" className="py-3 px-6">Pilot phone </th>
-       <th scope="col" className="py-3 px-6">Full name</th>
-       <th scope="col" className="py-3 px-6">Email</th>
-       <th scope="col" className="py-3 px-6">Valid until</th>
-       <th scope="col" className="py-3 px-6">View location</th>
+    <thead className="bg-black flex text-white w-full">
+     <tr className="flex w-full mb-4">
+       <th className="p-4 w-1/4">Pilot phone </th>
+       <th className="p-4 w-1/4">Full name</th>
+       <th className="p-4 w-1/4">Email</th>
+       <th className="p-4 w-1/4">Valid until</th>
+       <th className="p-4 w-1/4">View location</th>
      </tr>
    </thead>
   </>

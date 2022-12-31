@@ -1,54 +1,39 @@
 import React, { useEffect, useRef } from "react";
+import { useStateContext } from "../context/ContextProvider";
 
 const DisplayLocation = (props: any) => {
   const canvasRef = useRef(null);
-  const draw = (ctx: any, frameCount: any) => {
-    // ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    // ctx.strokeStyles = "orange";
-    // // draw a reactangular outline
-    // ctx.strokeRect(10, 10, 150, 150);
+  const { displayX, displayY, onClickToDisplay } = useStateContext() as any;
+  const draw = (ctx: any, frameCount: any, canvas: any) => {
 
-    // // Clears the specified rectangular area, making it fully transparent.
-    // ctx.clearRect(200, 200, 200, 200);
-
-    // // fillrect draw a thickass rectangular
-    // //ctx.strokeRect(50, 50, 50, 50);
-
-    // // draw background
-    // ctx.beginPath();
-    // ctx.strokeStyle = "#FD0";
-    // ctx.strokeRect(25, 25, 500, 500); // puter square
-    // ctx.moveTo(262.5, 262.5);
-    // ctx.strokeStyle = "red";
-    // ctx.arc(0, 0, 100, 0, 0, true);
-    // 339301.6	// 75729.9
-    const Xval = 339301.6 / 1000 + 25 ; 
-    const Yval = 75229.9 / 1000 + 25
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.beginPath();
-    ctx.strokeStyle = "yellow";
-    ctx.strokeRect(25, 25, 500, 500); // puter square
+    ctx.fillStyle = "yellow";
+    ctx.fillRect(25, 25, 500, 500); // puter square
     ctx.stroke();
-    //ctx.arc(75, 75, 50, 0, Math.PI * 2, true); // Outer circle
-    //ctx.moveTo(110, 75);
-    //ctx.moveTo(262.5, 262.5);
+  
     ctx.beginPath();
     ctx.strokeStyle = "red";
-    ctx.arc(262.5, 262.5, 100, 100, Math.PI *2 , true); // Mouth (clockwise)
-    ctx.stroke();
-    
-    ctx.beginPath();
-    ctx.strokeStyle = "green";
-    ctx.arc(Xval , Yval, 5, 0, Math.PI * 2, true); // Right eye
+    ctx.arc(262.5, 262.5, 100, 100, Math.PI * 2, true); // Mouth (clockwise)
     ctx.stroke();
 
-    // ctx.fillStyle = "#6C0";
-    // ctx.fillRect(75, 0, 75, 75);
-    // ctx.fillStyle = "#09F";
-    // ctx.fillRect(0, 75, 75, 75);
-    // ctx.fillStyle = "#F30";
-    // ctx.fillRect(75, 75, 75, 75);
-    // ctx.fillStyle = "#FFF";
+    ctx.beginPath();
+    ctx.fillStyle = "blue";
+    ctx.arc(262.5, 262.5, 5, 5, Math.PI * 2, true); // Mouth (clockwise)
+    ctx.fill();
+
+    if (displayX && displayY) {
+      const Xval = Number(displayX) / 1000 + 25;
+      const Yval = Number(displayY) / 1000 + 25;
+
+      ctx.beginPath();
+      ctx.strokeStyle = "green";
+      ctx.arc(Xval, Yval, 5, 0, Math.PI * 2, true); // Right eye
+      ctx.stroke();
+    }
+
   };
+
   useEffect(() => {
     const canvas = canvasRef.current as any;
     const context = canvas.getContext("2d");
@@ -56,14 +41,15 @@ const DisplayLocation = (props: any) => {
     let animationFrameId: any;
     const render = () => {
       frameCount++;
-      draw(context, frameCount);
+      draw(context, frameCount, canvas);
       animationFrameId = window.requestAnimationFrame(render);
     };
     render();
     return () => {
       window.cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, [displayX, displayY]);
+
 
   return <canvas ref={canvasRef} width="800px" height="800px" />;
 };

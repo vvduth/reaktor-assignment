@@ -13,10 +13,19 @@ const StateContext = createContext<any | null>(null);
 
 const ContextProvider: FC<PropsWithChildren> = ({ children }) => {
   
+  const [displayX, setDisplayX] = useState<any>() ;
+  const [displayY, setDisplayY] = useState<any>() ;
+
+  const onClickToDisplay = (x: any, y:any) => {
+    setDisplayX(x); 
+    setDisplayY(y)
+  }
   return (
     <StateContext.Provider
       value={{
-        
+        displayX, 
+        displayY, 
+        onClickToDisplay
       }}
     >
       {children}
