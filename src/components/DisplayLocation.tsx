@@ -18,6 +18,15 @@ const DisplayLocation = (props: any) => {
     ctx.stroke();
 
     ctx.beginPath();
+    ctx.font = "20px serif";
+    ctx.strokeStyle = "red";
+    ctx.strokeText("Inside the red circle is no flyzone", 50, 50);
+    ctx.strokeStyle = "blue";
+    ctx.strokeText("Blue dot is the captureing device aka the nest location", 50, 100);
+    ctx.strokeStyle = "green";
+    ctx.strokeText("The green dot is the violated drone position", 50, 450);
+
+    ctx.beginPath();
     ctx.fillStyle = "blue";
     ctx.arc(262.5, 262.5, 5, 5, Math.PI * 2, true); // Mouth (clockwise)
     ctx.fill();

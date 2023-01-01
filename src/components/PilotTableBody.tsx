@@ -21,25 +21,25 @@ const PilotTableBody = ({ pilots }: any) => {
             scope="row"
             className="p-4 w-1/4 text-white"
           >
-            {pilot.phoneNumber}
+            {/* {pilot.phoneNumber} */}
           </td>
           <td
             scope="row"
             className="p-4 w-1/4 text-white"
           >
-            {pilot.firstName} {pilot.lastName}
+            {/* {pilot.firstName} {pilot.lastName} */}
           </td>
           <td
             scope="row"
             className="p-4 w-1/4 text-white"
           >
-            {pilot.email}
+            {/* {pilot.email} */}
           </td>
           <td
             scope="row"
             className="p-4 w-1/4 text-white"
           >
-            <PilotTime validUntil={pilot.validUntil} />
+            {/* <PilotTime validUntil={pilot.validUntil} /> */}
           </td>
           <td
             scope="row"

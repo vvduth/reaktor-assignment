@@ -20,7 +20,7 @@ function App() {
           <DronesList />
         </div>
         <div>
-          <Infotext message={"Information of those pilots who drove violated drones"}/>
+          <Infotext message={"Information of those pilots who drove violated drones, click on the button then scroll down to view it"}/>
           <Pilots />
         </div>
         <div>
