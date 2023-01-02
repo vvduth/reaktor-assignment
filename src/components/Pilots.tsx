@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { violateCheckPilot } from "../utils/violateCheck";
 import PilotTableBody from "./PilotTableBody";
 import PilotTableHead from "./PilotTableHead";
-import { filterExpriedPilots, getViolatedPilots } from "../store/pilotsSlice";
+import { filterExpriedPilots, getFullPilotInfoFromSerialNumber, getViolatedPilots } from "../store/pilotsSlice";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 
 const Pilots = () => {
@@ -14,11 +14,14 @@ const Pilots = () => {
   const drones = useAppSelector((state) => state.drones.drones);
   
   useEffect(()=> {
-    
-  },[dispatch]) 
-  useEffect(()=> {
     dispatch(filterExpriedPilots())
-  },[drones])
+    console.log("this has been called every 2 sec probably")
+  },[ dispatch])
+
+  useEffect(()=> {
+    console.log("the array changed")
+    dispatch(getFullPilotInfoFromSerialNumber())
+  },[pilots.length])
   
   return (
     <>

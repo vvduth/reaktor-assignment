@@ -10,23 +10,29 @@ import { useAppSelector, useAppDispatch } from "./store/hooks";
 import SocketTest from "./components/SocketTest";
 import DisplayLocation from "./components/DisplayLocation";
 
-
 function App() {
   return (
     <ContextProvider>
       <div className="grid gap-2 grid-cols-2 grid-rows-2">
         <div>
-          <Infotext message={"Drone position, auto update every 2 secs"} />
-          <DronesList />
+          <Infotext
+            message={"Closest distance deteched and position visualization"}
+          />
+          <SocketTest />
+          <DisplayLocation />
         </div>
         <div>
-          <Infotext message={"Information of those pilots who drove violated drones, click on the button then scroll down to view it"}/>
+          <Infotext
+            message={
+              "Information of those pilots who drove violated drones, click on the button then scroll down to view it"
+            }
+          />
           <Pilots />
         </div>
+
         <div>
-          <Infotext message={"Closest distance deteched and position visualization"}/>
-          <SocketTest /> 
-          <DisplayLocation /> 
+          <Infotext message={"Drone position, auto update every 2 secs"} />
+          <DronesList />
         </div>
       </div>
     </ContextProvider>
