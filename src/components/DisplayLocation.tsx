@@ -25,6 +25,8 @@ const DisplayLocation = (props: any) => {
     ctx.strokeText("Blue dot is the captureing device aka the nest location", 50, 100);
     ctx.strokeStyle = "green";
     ctx.strokeText("The green dot is the violated drone position", 50, 450);
+    ctx.strokeStyle = "black";
+    ctx.strokeText("The yellow area is the range of the capture device", 50, 500);
 
     ctx.beginPath();
     ctx.fillStyle = "blue";

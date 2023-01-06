@@ -24,7 +24,7 @@ function App() {
         <div>
           <Infotext
             message={
-              "Information of those pilots who drove violated drones, click on the button then scroll down to view it"
+              "Information of those pilots who drove violated drones, click on the button to view it"
             }
           />
           <Pilots />
