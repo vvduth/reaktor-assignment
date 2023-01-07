@@ -18,10 +18,7 @@ const Pilots = () => {
     console.log("this has been called every 2 sec probably")
   },[ dispatch])
 
-  useEffect(()=> {
-    console.log("the array changed")
-    dispatch(getFullPilotInfoFromSerialNumber())
-  },[pilots.length])
+
   
   return (
     <>

@@ -13,7 +13,7 @@ import DisplayLocation from "./components/DisplayLocation";
 function App() {
   return (
     <ContextProvider>
-      <div className="grid gap-2 grid-cols-2 grid-rows-2">
+      <div className="grid gap-2 grid-cols-2 grid-rows-1">
         <div>
           <Infotext
             message={"Closest distance deteched and position visualization"}
@@ -28,11 +28,6 @@ function App() {
             }
           />
           <Pilots />
-        </div>
-
-        <div>
-          <Infotext message={"Drone position, auto update every 2 secs"} />
-          <DronesList />
         </div>
       </div>
     </ContextProvider>

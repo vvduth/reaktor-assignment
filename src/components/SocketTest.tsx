@@ -12,6 +12,7 @@ const SocketTest = () => {
 
   const dispatch = useAppDispatch();
   const socket = useAppSelector((state) => state.socket.socket);
+  const drones = useAppSelector((state) => state.drones.drones);
   useEffect(() => {
     const socket1 = io(socketURL);
     dispatch(setUpSocket(socket1));
@@ -29,16 +30,16 @@ const SocketTest = () => {
 
       });
 
+
       socket.on("closetDistance", (distance: any ) => {
         //console.log(distance)
         setClosetDisance(distance)
       })
+
+      
     }
   }, [socket]);
 
-  useEffect(() => {
-     
-   }, [list]);
   return (
     <>
       {(  closestDistance ) ? (
